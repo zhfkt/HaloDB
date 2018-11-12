@@ -32,11 +32,12 @@ class DBDirectory {
      */
     static DBDirectory open(File directory) throws IOException {
         FileUtils.createDirectoryIfNotExists(directory);
-        return new DBDirectory(directory, openReadOnlyChannel(directory));
+        //return new DBDirectory(directory, openReadOnlyChannel(directory));
+        return new DBDirectory(directory, null);
     }
 
     void close() throws IOException {
-        directoryChannel.close();
+        //directoryChannel.close();
     }
 
     Path getPath() {
@@ -66,10 +67,15 @@ class DBDirectory {
      * an exception we silently swallow it.
      */
     void syncMetaData() {
+    	
+    	/*
+    	
         try {
             directoryChannel.force(true);
         } catch (IOException e) {
         }
+        
+        */
     }
 
     private static FileChannel openReadOnlyChannel(File dbDirectory) throws IOException {
